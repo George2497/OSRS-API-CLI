@@ -18,6 +18,9 @@ def main():
   cs = cluescrolls.ClueScroll()
   cs.findClueScroll()
 
+  b = bosses.Bosses()
+  b.findBoss()
+
   osrsSearch = searchInformation()
   osrsSearch.search()
 

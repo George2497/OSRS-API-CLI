@@ -1,16 +1,18 @@
 from OSRSBytes import Hiscores
 import highscores
 
+bossname = None
+
 class Bosses:
-  def findBoss():
+  def findBoss(self):
     boss = input("Please enter a boss: ")
     bossname = boss
     # Bosses
-    print("Wintertodt Kills: ", highscores.user.boss(bossname, "score"))
+    print(bossname, " Kills: ", highscores.user.boss(bossname, "score"))
 
 def main():
-  HS = Bosses
-  HS.findBoss()
+  bossLookup = Bosses
+  bossLookup.findBoss()
 
 if __name__=="__main__":
   main()

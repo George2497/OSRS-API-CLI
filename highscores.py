@@ -7,7 +7,7 @@ class Highscore:
     # Searches for a player and loads their profile
     global user
     target_username = input("Enter a username: ")
-    user = Hiscores(target_username) 
+    user = Hiscores(target_username)
 
     # Skills
     trainingMethod = input("Which skill would you like to view?: ").lower()
