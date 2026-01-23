@@ -1,32 +1,37 @@
 from OSRSBytes import Items
 
-class Item:
-  def findItem():
-    items = Items()
-    print("Is Members: ", items.isMembers('rune dagger'))
-    print("Item ID: ", items.getItemID('rune dagger'))
+item = None
 
-    print("Sell Average: ", items.getSellAverage('rune dagger'), "gp")
-    print("Sell Quantity: ", items.getSellQuantity('rune dagger'))
+class ItemSearch:
+  def findItem(self):
+    global item
+    items = input("Enter an item: ")
+    item = Items(items)
 
-    print("Buy Average ", items.getBuyAverage('rune dagger'), "gp")
-    print("Buy Quantity: ", items.getBuyQuantity('rune dagger'))
-    print("Buy Limit: ", items.getBuyLimit('rune dagger'))
+    print("Is Members: ", item.isMembers(items))
+    print("Item ID: ", item.getItemID(items))
 
-    print("Shop Price ", items.getShopPrice('rune dagger'), "gp")
-    print("High Alch Value: ", items.getHighAlchValue('rune dagger'), "gp")
-    print("Low Alch Value: ", items.getLowAlchValue('rune dagger'), "gp")
+    print("Sell Average: ", item.getSellAverage(items), "gp")
+    print("Sell Quantity: ", item.getSellQuantity(items))
 
-    print("Item Name: ", items.getName('rune dagger'))
-    print("Sell Average: ", items.getSellAverage('rune dagger'), "gp")
+    print("Buy Average ", item.getBuyAverage(items), "gp")
+    print("Buy Quantity: ", item.getBuyQuantity(items))
+    print("Buy Limit: ", item.getBuyLimit(items))
 
-    items.update()
+    print("Shop Price ", item.getShopPrice(items), "gp")
+    print("High Alch Value: ", item.getHighAlchValue(items), "gp")
+    print("Low Alch Value: ", item.getLowAlchValue(items), "gp")
 
-    print("Sell Average: ", items.getSellAverage('rune dagger'), "gp")
+    print("Item Name: ", item.getName(items))
+    print("Sell Average: ", item.getSellAverage(items), "gp")
+
+    item.update()
+
+    print("Sell Average: ", item.getSellAverage(items), "gp")
 
 def main():
-  HS = Item
-  HS.findItem()
+  itLookup = ItemSearch()
+  itLookup.findItem()
 
 if __name__=="__main__":
   main()
