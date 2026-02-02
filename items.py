@@ -3,35 +3,22 @@ from OSRSBytes import Items
 item = None
 
 class ItemSearch:
-  def findItem(self):
-    global item
-    items = input("Enter an item: ")
-    item = Items(items)
 
-    print("Is Members: ", item.isMembers(items))
-    print("Item ID: ", item.getItemID(items))
+  def __init__(self, item):
+    self.item = Items(item)
 
-    print("Sell Average: ", item.getSellAverage(items), "gp")
-    print("Sell Quantity: ", item.getSellQuantity(items))
+  def find_item(self, item_name):
 
-    print("Buy Average ", item.getBuyAverage(items), "gp")
-    print("Buy Quantity: ", item.getBuyQuantity(items))
-    print("Buy Limit: ", item.getBuyLimit(items))
+    print("Is Members: ", self.item.isMembers(item_name))
+    print("Item ID: ", self.item.getItemID(item_name))
 
-    print("Shop Price ", item.getShopPrice(items), "gp")
-    print("High Alch Value: ", item.getHighAlchValue(items), "gp")
-    print("Low Alch Value: ", item.getLowAlchValue(items), "gp")
+    print("Sell Average: ", self.item.getSellAverage(item_name), "gp")
+    print("Sell Quantity: ", self.item.getSellQuantity(item_name))
 
-    print("Item Name: ", item.getName(items))
-    print("Sell Average: ", item.getSellAverage(items), "gp")
+    print("Buy Average ", self.item.getBuyAverage(item_name), "gp")
+    print("Buy Quantity: ", self.item.getBuyQuantity(item_name))
+    print("Buy Limit: ", self.item.getBuyLimit(item_name))
 
-    item.update()
-
-    print("Sell Average: ", item.getSellAverage(items), "gp")
-
-def main():
-  itLookup = ItemSearch()
-  itLookup.findItem()
-
-if __name__=="__main__":
-  main()
+    print("Shop Price ", self.item.getShopPrice(item_name), "gp")
+    print("High Alch Value: ", self.item.getHighAlchValue(item_name), "gp")
+    print("Low Alch Value: ", self.item.getLowAlchValue(item_name), "gp")

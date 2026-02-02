@@ -1,36 +1,23 @@
 from OSRSBytes import Hiscores
-import highscores
 
 clue = None
 
 class ClueScroll:
-  def findClueScroll(self):
-    cluescrolls = input("Which clue scrolls would you like to look up? \n" \
-    "beginner, easy, medium, hard, elite, master: ")
-    clue = Hiscores(cluescrolls)
+  def __init__(self, username):
+    self.username = username
+    self.user = Hiscores(username)
 
-    if cluescrolls.lower() == 'beginner':
-      print("Beginner clues done: ", highscores.user.clue(cluescrolls, "score"))
+  def find_clue_scroll(self, cluescroll_type):
+    option = {
+      "beginner" : lambda: print("Beginner clues done: ", self.user.clue("beginner", "score")),
+      "easy" : lambda: print("Easy clues done: ", self.user.clue("easy", "score")),
+      "medium" : lambda: print("Medium clues done: ", self.user.clue("medium", "score")),
+      "hard" : lambda: print("Hard clues done: ", self.user.clue("hard", "score")),
+      "elite" : lambda: print("Elite clues done: ", self.user.clue("elite", "score")),
+      "master" : lambda: print("Master clues done: ", self.user.clue("master", "score")),
+    }
 
-    if cluescrolls.lower() == 'easy':
-      print("Easy clues done: ", highscores.user.clue(cluescrolls, "score"))
-
-    if cluescrolls.lower() == 'medium':
-      print("Medium clues done: ", highscores.user.clue(cluescrolls, "score"))
-
-    if cluescrolls.lower() == 'hard':
-      print("Hard clues done: ", highscores.user.clue(cluescrolls, "score"))
-
-    if cluescrolls.lower() == 'elite':
-      print("Elite clues done: ", highscores.user.clue(cluescrolls, "score"))
-
-    if cluescrolls.lower() == 'master':
-      print("Master clues done: ", highscores.user.clue(cluescrolls, "score"))
-
-
-def main():
-  cslLookup = ClueScroll()
-  cslLookup.findClueScroll()
-
-if __name__=="__main__":
-  main()
+    if cluescroll_type in option :
+      option[cluescroll_type]()
+    else:
+      print("Please enter a valid option...")
