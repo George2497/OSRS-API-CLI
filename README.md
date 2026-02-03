@@ -43,3 +43,9 @@ they have completed (Beginner, Easy, Medium, Hard, Elite and Master)
 Bosses is not implemented into the menu to allo users to check how many of eash boss they have defeated
 
 ----------------------------filter_selected_options_branch----------------------------
+
+---------------------------------exit_condition_branch--------------------------------
+03/02/2025
+Exit conditions have been set to the all functions of the menu to allow the user to press ENTER to quit
+the programme
+---------------------------------exit_condition_branch--------------------------------

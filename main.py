@@ -7,6 +7,7 @@ import cluescrolls
 
 class searchInformation:
   def menu(self):
+    print("If you would like to quit, press ENTER")
     print("What would you like to look up?:\n" \
     "1. Stats\n" \
     "2. Item\n" \
@@ -30,7 +31,15 @@ class searchInformation:
 
   def stats_lookup(self):
     username = input("Enter username: ")
+    if username == "":
+      print("Thank you for using OSRS CLI...goodbye")
+      quit()
+
     skillname = input("Which skill would you like to view?: ").strip().lower()
+    if skillname == "":
+      print("Thank you for using OSRS CLI...goodbye")
+      quit()
+
     skillname = normalize_skill(skillname)
     hs = highscores.Highscore(username)
     hs.show_skill(skillname)
@@ -38,21 +47,40 @@ class searchInformation:
   
   def item_lookup(self):
     item = input("Enter item: ").strip().lower()
+    if item == "":
+      print("Thank you for using OSRS CLI...goodbye")
+      quit()
+
     it = items.ItemSearch(item)
     it.find_item(item)
     searchInformation.menu(self)
 
   def clue_lookup(self):
     username = input("Enter username: ").strip().lower()
+    if username == "":
+      print("Thank you for using OSRS CLI...goodbye")
+      quit()
+
     clues = input("Which clue scrolls would you like to look up? \n" \
     "beginner, easy, medium, hard, elite, master: ")
+    if clues == "":
+      print("Thank you for using OSRS CLI...goodbye")
+      quit()
+
     cs = cluescrolls.ClueScroll(username)
     cs.find_clue_scroll(clues)
     searchInformation.menu(self)
 
   def boss_lookup(self):
     username = input("Enter username: ")
+    if username == "":
+      print("Thank you for using OSRS CLI...goodbye")
+      quit()
+
     bossname = input("Which boss would you like to look up?: ")
+    if bossname == "":
+      print("Thank you for using OSRS CLI...goodbye")
+      quit()
     hs = bosses.Bosses(username)
     hs.find_boss(bossname)
 
