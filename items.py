@@ -22,3 +22,4 @@ class ItemSearch:
     print("Shop Price ", self.item.getShopPrice(item_name), "gp")
     print("High Alch Value: ", self.item.getHighAlchValue(item_name), "gp")
     print("Low Alch Value: ", self.item.getLowAlchValue(item_name), "gp")
+
