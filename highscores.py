@@ -1,6 +1,15 @@
 from OSRSBytes import Hiscores
+from rapidfuzz import process, fuzz
 
 user = None
+
+skillsList = [
+      "attack", "strength", "defence", "ranged", "prayer",
+      "magic", "hitpoints", "runecrafting", "crafting", "mining",
+      "smithing", "fishing", "cooking", "firemaking", "woodcutting",
+      "agility", "herblore", "thieving", "fletching", "slayer",
+      "farming", "construction", "hunter"
+    ]
 
 class Highscore:
   def __init__(self, username):
@@ -9,24 +18,16 @@ class Highscore:
 
   def show_skill(self, skill):
 
-    # Skills
     print(f"\nHere is the {skill} skill information for {self.username}\n")
     print("Current level: ", self.user.skill(skill, "level"))
     print("Current rank: ", self.user.skill(skill, "rank"))
     print("Current exp: ", self.user.skill(skill, "experience"))
-    print("Exp remaining: ", self.user.skill(skill, "exp_to_next_level"))
+    print("Exp remaining: ", self.user.skill(skill, "exp_to_next_level"), end="\n\n")
+
 
 
   def show_all_skills(self):
-    skillsList = [
-      "attack", "strength", "defence", "ranged", "prayer",
-      "magic", "hitpoints", "runecrafting", "crafting", "mining",
-      "smithing", "fishing", "cooking", "firemaking", "woodcutting",
-      "agility", "herblore", "thieving", "fletching", "slayer",
-      "farming", "construction", "hunter"
-    ]
-
-    for skill in skillsList:
+    for skill in self.skillsList:
       self.show_skill(skill)
 
 def normalize_skill(skill):
@@ -61,3 +62,16 @@ def normalize_skill(skill):
     "hunt" : "hunter"
   }
   return aliases.get(skill, skill)
+
+def find_valid_skills(user_input):
+  user_input = user_input.lower()
+  normalized = normalize_skill(user_input)
+  if normalized in skillsList:
+    return normalized
+  
+  match, score, _ = process.extractOne(user_input, skillsList, scorer=fuzz.ratio)
+
+  if score >= 80:
+    return match
+  else:
+    return None

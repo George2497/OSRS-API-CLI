@@ -1,13 +1,9 @@
 from OSRSBytes import Hiscores
-import highscores
+from rapidfuzz import process, fuzz
 
 bossname = None
 
-class Bosses:
-  def __init__(self, username):
-    self.username = username
-    self.user = Hiscores(username)
-    self.bosses = [
+boss_names = [
     "abyssal_sire", "alchemical_hydra", "barrows_chests", "bryophyta",
     "callisto", "cerberus", "chambers_of_xeric", "chambers_of_xeric_challenge_mode",
     "chaos_elemental", "chaos_fanatic", "commander_zilyana", "corporeal_beast",
@@ -21,8 +17,26 @@ class Bosses:
     "vorkath", "wintertodt", "zalcano", "zulrah"
     ]
 
+def find_valid_boss(user_input):
+    user_input = user_input.lower()
+    if user_input in boss_names:
+      return user_input
+    
+    match, score, _ = process.extractOne(user_input, boss_names, scorer=fuzz.ratio)
+
+    if score >= 80:
+      return match
+    else:
+      return None
+
+class Bosses:
+  def __init__(self, username):
+    self.username = username
+    self.user = Hiscores(username)
+    self.bosses = boss_names
+    
   def find_boss(self, bossname):
-    bossname = bossname.strip().lower()
+    print(f"{self.username}'s information for {bossname}")
 
     if bossname not in self.bosses:
       print("Boss not found...")

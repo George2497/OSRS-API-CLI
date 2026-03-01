@@ -1,6 +1,6 @@
 from OSRSBytes import Hiscores
 import highscores
-from highscores import normalize_skill
+from highscores import find_valid_skills
 import items
 import bosses
 import cluescrolls
@@ -40,10 +40,13 @@ class searchInformation:
       print("Thank you for using OSRS CLI...goodbye")
       quit()
 
-    skillname = normalize_skill(skillname)
-    hs = highscores.Highscore(username)
-    hs.show_skill(skillname)
-    searchInformation.menu(self)
+    skillname = find_valid_skills(skillname)
+    if skillname is None:
+      print("Skill not found or too ambigious...")
+    else:
+      hs = highscores.Highscore(username)
+      hs.show_skill(skillname)
+      searchInformation.menu(self)
   
   def item_lookup(self):
     item = input("Enter item: ").strip().lower()
@@ -61,15 +64,19 @@ class searchInformation:
       print("Thank you for using OSRS CLI...goodbye")
       quit()
 
-    clues = input("Which clue scrolls would you like to look up? \n" \
+    option = input("Which clue scrolls would you like to look up? \n" \
     "beginner, easy, medium, hard, elite, master: ")
-    if clues == "":
+    if option == "":
       print("Thank you for using OSRS CLI...goodbye")
       quit()
 
     cs = cluescrolls.ClueScroll(username)
-    cs.find_clue_scroll(clues)
-    searchInformation.menu(self)
+    option = cs.find_valid_clue(option)
+    if option is None:
+      print("Clue scroll is not found or too ambiguous...")
+    else:
+      cs.find_clue_scroll(option)
+      searchInformation.menu(self)
 
   def boss_lookup(self):
     username = input("Enter username: ")
@@ -81,8 +88,14 @@ class searchInformation:
     if bossname == "":
       print("Thank you for using OSRS CLI...goodbye")
       quit()
-    hs = bosses.Bosses(username)
-    hs.find_boss(bossname)
+      
+    bossname = bosses.find_valid_boss(bossname)
+    if bossname is None:
+      print("Boss is not found or too ambigious...")
+    else:
+      bn = bosses.Bosses(username)
+      bn.find_boss(bossname)
+      searchInformation.menu(self)
 
 def main():
   osrsSearch = searchInformation()

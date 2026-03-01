@@ -45,7 +45,20 @@ Bosses is not implemented into the menu to allo users to check how many of eash 
 ----------------------------filter_selected_options_branch----------------------------
 
 ---------------------------------exit_condition_branch--------------------------------
-03/02/2025
+03/02/2026
 Exit conditions have been set to the all functions of the menu to allow the user to press ENTER to quit
 the programme
 ---------------------------------exit_condition_branch--------------------------------
+---------------------------------fuzzy_matching_branch--------------------------------
+28/02/2026
+Rapidfuzz is being used to allow fuzzy matching to the different modules within the project
+
+fuzzy matching has been incorporated into highscores.py to allow a match to be given to skills that are inputted
+e.g. attk == attack by an matching score of currently 80%, this percentage can be altered wihtin the find_valid_skills
+function within highscores.py
+
+fuzzy matching has been added into bosses.py to allow a user to give a match that closely resembles the bosses listed
+e.g. vorkth == Vorkath
+
+fuzzy matching been added into cluescrolls.py to allow close matches to cluescroll names e.g. esy == easy
+---------------------------------fuzzy_matching_branch--------------------------------
